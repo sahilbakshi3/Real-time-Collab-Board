@@ -36,11 +36,39 @@ io.on("connection", (socket) => {
   };
 
   users.set(socket.id, user);
+
+  socket.emit("init", {
+    canvasState,
+    users: Array.from(users.values()),
+    myId: socket.id,
+    myColor: userColor,
+    myName: user.name,
+  });
+
+  socket.broadcast.emit("user-joined", user);
+
   console.log("Connected", user.name);
+
+  socket.on("cursor-move", (pos) => {
+    const u = users.get(socket.id);
+
+    if (u) {
+      u.cursor = pos;
+
+      socket.broadcast.emit("cursor-update", {
+        id: socket.id,
+        x: pos.x,
+        y: pos.y,
+        color: u.color,
+        name: u.name,
+      });
+    }
+  });
 
   socket.on("disconnect", () => {
     users.delete(socket.id);
-    console.log("Disconnected", user.name);
+    io.emit("user-left", socket.id);
+    console.log("Left", user.name);
   });
 });
 
