@@ -9,11 +9,38 @@ const io = new Server(httpServer, {
   },
 });
 
+const users = new Map();
+
+const COLORS = [
+  "#FF6B6B",
+  "#4ECDC4",
+  "#45B7D1",
+  "#96CEB4",
+  "#FFEAA7",
+  "#DDA0DD",
+  "#98D8C8",
+  "#F7DC6F",
+];
+
+let colorIndex = 0;
+
 io.on("connection", (socket) => {
-  console.log("User Connected:", socket.id);
+  const userColor = COLORS[colorIndex % COLORS.length];
+  colorIndex++;
+
+  const user = {
+    id: socket.id,
+    color: userColor,
+    cursor: { x: 0, y: 0 },
+    name: `User ${Math.floor(Math.random() * 9000) + 1000}`,
+  };
+
+  users.set(socket.id, user);
+  console.log("Connected", user.name);
 
   socket.on("disconnect", () => {
-    console.log("User Disconnected:", socket.id);
+    users.delete(socket.id);
+    console.log("Disconnected", user.name);
   });
 });
 
