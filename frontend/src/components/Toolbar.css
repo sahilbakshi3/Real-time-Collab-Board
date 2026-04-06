@@ -1,0 +1,139 @@
+.toolbar {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  min-width: 58px;
+}
+
+.toolbar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.toolbar-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+}
+
+.toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.toolbar-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  width: 100%;
+}
+
+.tool-btn {
+  width: 40px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  align-self: center;
+}
+
+.tool-btn:hover {
+  background: var(--surface3);
+  color: var(--text);
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: transparent;
+}
+
+.tool-btn.danger:hover {
+  background: rgba(255, 77, 77, 0.1);
+  color: var(--danger);
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.color-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--c);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.color-btn:hover {
+  transform: scale(1.25);
+}
+.color-btn.active {
+  border-color: var(--text);
+  box-shadow: 0 0 0 1.5px var(--bg);
+  transform: scale(1.1);
+}
+
+.size-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.size-btn {
+  width: 40px;
+  height: 26px;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.size-btn:hover {
+  background: var(--surface3);
+}
+
+.size-btn.active {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+}
+
+.size-btn.active .size-dot {
+  background: var(--accent);
+}
+
+.size-dot {
+  border-radius: 50%;
+  background: var(--text-muted);
+  min-width: 5px;
+  min-height: 5px;
+  transition: background 0.12s;
+}
