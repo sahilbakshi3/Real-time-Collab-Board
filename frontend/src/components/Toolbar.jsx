@@ -2,8 +2,8 @@ import React from "react";
 import "./Toolbar.css";
 import { Eraser, Pen, StickyNoteIcon, Trash2, Undo } from "lucide-react";
 
-const COLORS = [
-  "#ededed",
+const getColors = (theme) => [
+  theme === "dark" ? "#ededed" : "#1a1a1a",
   "#ff6b6b",
   "#fbbf24",
   "#34d399",
@@ -25,7 +25,10 @@ const Toolbar = ({
   onClear,
   onUndo,
   onAddSticky,
+  theme,
 }) => {
+  const COLORS = getColors(theme);
+
   return (
     <div className="toolbar">
       <div className="toolbar-section">
