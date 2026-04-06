@@ -78,7 +78,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("draw-end", (stroke) => {
-    canvasState.stroke.push(stroke);
+    canvasState.strokes.push(stroke);
     socket.broadcast.emit("draw-end", { ...stroke, userId: socket.id });
   });
 

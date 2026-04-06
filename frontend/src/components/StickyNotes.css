@@ -1,0 +1,66 @@
+.stickies-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.sticky-note {
+  position: absolute;
+  width: 175px;
+  background: var(--sticky-color, var(--sticky-1));
+  border-radius: 2px;
+  box-shadow:
+    3px 3px 0px rgba(0, 0, 0, 0.15),
+    6px 6px 16px rgba(0, 0, 0, 0.12);
+  pointer-events: all;
+  cursor: grab;
+  user-select: none;
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+
+.sticky-note:hover {
+  box-shadow:
+    4px 4px 0px rgba(0, 0, 0, 0.18),
+    8px 8px 24px rgba(0, 0, 0, 0.18);
+  transform: rotate(-0.3deg);
+  z-index: 40;
+}
+
+.sticky-note.dragging {
+  cursor: grabbing;
+  box-shadow:
+    8px 8px 0px rgba(0, 0, 0, 0.2),
+    16px 16px 40px rgba(0, 0, 0, 0.25);
+  transform: rotate(1.2deg) scale(1.02);
+  z-index: 50;
+}
+
+.sticky-header {
+  background: rgba(0, 0, 0, 0.07);
+  padding: 5px 8px 4px;
+  border-radius: 2px 2px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.sticky-text {
+  background: transparent;
+  width: 100%;
+  padding: 8px 10px 10px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #1a1a1a;
+  resize: none;
+  border: none;
+  outline: none;
+  cursor: text;
+  line-height: 1.6;
+}
+
+.sticky-text::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+  font-style: italic;
+}
