@@ -1,0 +1,29 @@
+.cursors-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.remote-cursor {
+  position: absolute;
+  transform: translate(-2px, -2px);
+  transition:
+    left 0.05s linear,
+    top 0.05s linear;
+  pointer-events: none;
+}
+
+.cursor-label {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  background: var(--user-color);
+  color: #0e0e0e;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
