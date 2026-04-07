@@ -26,6 +26,7 @@ let colorIndex = 0;
 let canvasState = {
   strokes: [],
   stickies: [],
+  shapes: [],
 };
 
 io.on("connection", (socket) => {
@@ -116,7 +117,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("clear-canvas", () => {
-    canvasState = { strokes: [], stickies: [] };
+    canvasState = { strokes: [], stickies: [], shapes: [] };
     io.emit("canvas-cleared");
   });
 
@@ -124,6 +125,15 @@ io.on("connection", (socket) => {
     users.delete(socket.id);
     io.emit("user-left", socket.id);
     console.log("Left", user.name);
+  });
+
+  socket.on("add-shape", (shape) => {
+    const newShape = {
+      ...shape,
+      id: `shape-${Date.now()}-${socket.id}`,
+    };
+    canvasState.shapes.push(newShape);
+    io.emit("shape-added", newShape);
   });
 });
 

@@ -7,36 +7,43 @@
 }
 
 :root {
-  --bg: #0e0e0e;
-  --surface: #161616;
-  --surface2: #1f1f1f;
-  --surface3: #2a2a2a;
-  --border: #2e2e2e;
-  --border-subtle: #232323;
-  --text: #ededed;
-  --text-muted: #6a6a6a;
-  --text-subtle: #444;
-  --accent: #e8ff57;
-  --accent-fg: #0e0e0e;
-  --accent-glow: rgba(232, 255, 87, 0.12);
-  --danger: #ff4d4d;
-  --success: #3ecf8e;
-  --warn: #f5a623;
+  --bg: #111113;
+  --surface: #1a1a1f;
+  --surface2: #222228;
+  --surface3: #2c2c35;
+  --surface4: #35353f;
+  --border: #303038;
+  --border-subtle: #252529;
+  --text: #f2f2f7;
+  --text-muted: #5c5c6e;
+  --text-subtle: #3a3a48;
+  --accent: #7fff6e;
+  --accent-dim: #5ad44b;
+  --accent-fg: #0a1a08;
+  --accent-glow: rgba(127, 255, 110, 0.1);
+  --accent-glow-strong: rgba(127, 255, 110, 0.2);
+  --blue: #5b8af5;
+  --purple: #9b72f5;
+  --orange: #f5923b;
+  --red: #f55b5b;
+  --cyan: #3dd6c8;
+  --danger: #f55b5b;
+  --success: #7fff6e;
   --sticky-1: #fde68a;
   --sticky-2: #a7f3d0;
   --sticky-3: #bfdbfe;
   --sticky-4: #fecaca;
-  --radius: 8px;
-  --radius-sm: 5px;
-  --radius-xs: 3px;
-  --font-ui: "Geist", sans-serif;
-  --font-display: "Instrument Serif", serif;
-  --font-mono: "DM Mono", monospace;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --canvas-dot: #2a2a2a;
-  --canvas-bg: #0e0e0e;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
+  --font-ui: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(127, 255, 110, 0.15);
+  --canvas-dot: #222228;
+  --canvas-bg: #111113;
 }
 
 html,
@@ -52,10 +59,6 @@ body {
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
 }
 
 button {
@@ -74,13 +77,11 @@ textarea {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 99px;
