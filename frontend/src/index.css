@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-[data-theme="dark"] {
+:root {
   --bg: #0e0e0e;
   --surface: #161616;
   --surface2: #1f1f1f;
@@ -39,39 +39,6 @@
   --canvas-bg: #0e0e0e;
 }
 
-[data-theme="light"] {
-  --bg: #f5f4f0;
-  --surface: #fafaf8;
-  --surface2: #f0efe9;
-  --surface3: #e8e7e0;
-  --border: #ddddd5;
-  --border-subtle: #e8e7e0;
-  --text: #1a1a1a;
-  --text-muted: #888880;
-  --text-subtle: #bbb;
-  --accent: #1a1a1a;
-  --accent-fg: #f5f4f0;
-  --accent-glow: rgba(26, 26, 26, 0.08);
-  --danger: #e53e3e;
-  --success: #2f855a;
-  --warn: #c05621;
-  --sticky-1: #fef9c3;
-  --sticky-2: #dcfce7;
-  --sticky-3: #dbeafe;
-  --sticky-4: #fee2e2;
-  --radius: 8px;
-  --radius-sm: 5px;
-  --radius-xs: 3px;
-  --font-ui: "Geist", sans-serif;
-  --font-display: "Instrument Serif", serif;
-  --font-mono: "DM Mono", monospace;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.07);
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --canvas-dot: #d4d4cc;
-  --canvas-bg: #f5f4f0;
-}
-
 html,
 body,
 #root {
@@ -99,7 +66,8 @@ button {
   transition: all 0.12s ease;
 }
 
-input {
+input,
+textarea {
   font-family: var(--font-ui);
   outline: none;
   border: none;

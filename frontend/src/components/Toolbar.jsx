@@ -49,7 +49,7 @@ const Toolbar = ({
             <Eraser size={16} strokeWidth={1.8} />
           </button>
           <button
-            className={`tool-btn ${tool === "stciky" ? "active" : ""}`}
+            className={`tool-btn ${tool === "sticky" ? "active" : ""}`}
             onClick={() => {
               setTool("sticky");
               onAddSticky();

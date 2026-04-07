@@ -14,22 +14,7 @@ export default function App() {
   const [tool, setTool] = useState("pen");
   const [strokeWidth, setStrokeWidth] = useState(4);
   const [stickies, setStickies] = useState([]);
-  const [theme, setTheme] = useState("dark");
-  const [color, setColor] = useState(theme === "dark" ? "#ededed" : "#1a1a1a");
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((t) => {
-      const next = t === "dark" ? "light" : "dark";
-      setColor(next === "dark" ? "#ededed" : "#1a1a1a");
-      return next;
-    });
-  };
-
-  const eraserColor = theme === "dark" ? "#0e0e0e" : "#f5f4f0";
+  const [color, setColor] = useState("#ededed");
 
   const { connected, myInfo, users, emit, on, off } = useSocket(SERVER_URL);
 
@@ -42,7 +27,6 @@ export default function App() {
       on,
       off,
       myInfo,
-      eraserColor,
     });
 
   useEffect(() => {
@@ -130,7 +114,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header myInfo={myInfo} theme={theme} toggleTheme={toggleTheme} />
+      <Header myInfo={myInfo} />
       <div className="canvas-container">
         <canvas
           ref={canvasRef}
@@ -158,7 +142,6 @@ export default function App() {
         onClear={handleClear}
         onUndo={() => emit("undo")}
         onAddSticky={handleAddSticky}
-        theme={theme}
       />
       <UsersPanel users={users} myInfo={myInfo} connected={connected} />
     </div>
