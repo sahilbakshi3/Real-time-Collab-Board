@@ -9,7 +9,8 @@
 .canvas-container {
   position: absolute;
   inset: 0;
-  top: 56px;
+  top: 52px;
+  bottom: 72px;
   overflow: hidden;
 }
 
@@ -24,7 +25,6 @@
     var(--canvas-dot) 1px,
     transparent 1px
   );
-  background-size: 24px 24px;
+  background-size: 28px 28px;
   background-color: var(--canvas-bg);
-  transition: background-color 0.2s ease;
 }

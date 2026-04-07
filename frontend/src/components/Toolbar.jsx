@@ -1,21 +1,39 @@
-import React from "react";
+import {
+  Pen,
+  Eraser,
+  StickyNote,
+  Square,
+  Circle,
+  MoveUpRight,
+  Type,
+  Undo2,
+  Trash2,
+} from "lucide-react";
 import "./Toolbar.css";
-import { Eraser, Pen, StickyNoteIcon, Trash2, Undo } from "lucide-react";
 
-const getColors = (theme) => [
-  theme === "dark" ? "#ededed" : "#1a1a1a",
-  "#ff6b6b",
-  "#fbbf24",
-  "#34d399",
-  "#60a5fa",
-  "#a78bfa",
-  "#f472b6",
-  "#fb923c",
+const COLORS = [
+  "#f2f2f7",
+  "#7fff6e",
+  "#5b8af5",
+  "#f5923b",
+  "#f55b5b",
+  "#9b72f5",
+  "#3dd6c8",
+  "#fde68a",
+];
+const SIZES = [2, 4, 7, 12];
+
+const TOOLS = [
+  { id: "pen", icon: Pen, label: "Pen", key: "P" },
+  { id: "eraser", icon: Eraser, label: "Eraser", key: "E" },
+  { id: "rect", icon: Square, label: "Rect", key: "R" },
+  { id: "circle", icon: Circle, label: "Circle", key: "C" },
+  { id: "arrow", icon: MoveUpRight, label: "Arrow", key: "A" },
+  { id: "text", icon: Type, label: "Text", key: "T" },
+  { id: "sticky", icon: StickyNote, label: "Sticky", key: "S" },
 ];
 
-const STROKE_SIZES = [2, 4, 8, 14];
-
-const Toolbar = ({
+export default function Toolbar({
   tool,
   setTool,
   color,
@@ -25,97 +43,78 @@ const Toolbar = ({
   onClear,
   onUndo,
   onAddSticky,
-  theme,
-}) => {
-  const COLORS = getColors(theme);
+}) {
+  const handleToolClick = (id) => {
+    if (id === "sticky") {
+      setTool("sticky");
+      onAddSticky();
+    } else setTool(id);
+  };
 
   return (
     <div className="toolbar">
-      <div className="toolbar-section">
-        <span className="toolbar-label">tools</span>
-        <div className="toolbar-group">
-          <button
-            className={`tool-btn ${tool === "pen" ? "active" : ""}`}
-            onClick={() => setTool("pen")}
-            title="Pen (P)"
-          >
-            <Pen size={16} strokeWidth={1.8} />
-          </button>
-          <button
-            className={`tool-btn ${tool === "eraser" ? "active" : ""}`}
-            onClick={() => setTool("eraser")}
-            title="Eraser (E)"
-          >
-            <Eraser size={16} strokeWidth={1.8} />
-          </button>
-          <button
-            className={`tool-btn ${tool === "sticky" ? "active" : ""}`}
-            onClick={() => {
-              setTool("sticky");
-              onAddSticky();
-            }}
-            title="Sticky (S)"
-          >
-            <StickyNoteIcon size={16} strokeWidth={1.8} />
-          </button>
-        </div>
-      </div>
-
-      <div className="toolbar-divider" />
-
-      <div className="toolbar-section">
-        <span className="toolbar-label">color</span>
-        <div className="color-grid">
-          {COLORS.map((c) => (
+      {/* Tools */}
+      <div className="toolbar-group">
+        {TOOLS.map((item) => {
+          const ToolIcon = item.icon; // Explicitly assign to a Capitalized variable
+          return (
             <button
-              key={c}
-              className={`color-btn ${color === c ? "active" : ""}`}
-              style={{ "--c": c }}
-              onClick={() => setColor(c)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="toolbar-divider" />
-      <div className="toolbar-section">
-        <span className="toolbar-label">size</span>
-        <div className="size-group">
-          {STROKE_SIZES.map((s) => (
-            <button
-              key={s}
-              className={`size-btn ${strokeWidth === s ? "active" : ""}`}
-              onClick={() => setStrokeWidth(s)}
+              key={item.id}
+              className={`tool-btn ${tool === item.id ? "active" : ""}`}
+              onClick={() => handleToolClick(item.id)}
+              title={`${item.label} (${item.key})`}
             >
-              <span
-                className="size-dot"
-                style={{ width: s + 3, height: s + 3 }}
-              />
+              <ToolIcon size={15} strokeWidth={1.9} />
+              <span className="tool-key">{item.key}</span>
             </button>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      <div className="toolbar-divider" />
+      <div className="toolbar-sep" />
 
-      <div className="toolbar-section">
-        <span className="toolbar-label">edit</span>
-        <div className="toolbar-group">
-          <button className="tool-btn" onClick={onUndo} title="Undo (Ctrl+Z)">
-            <Undo size={16} strokeWidth={1.8} />
-          </button>
-
+      {/* Colors */}
+      <div className="toolbar-group">
+        {COLORS.map((c) => (
           <button
-            className="tool-btn danger"
-            onClick={onClear}
-            title="Clear All"
+            key={c}
+            className={`color-dot ${color === c ? "active" : ""}`}
+            style={{ "--c": c }}
+            onClick={() => setColor(c)}
+          />
+        ))}
+      </div>
+
+      <div className="toolbar-sep" />
+
+      {/* Stroke size */}
+      <div className="toolbar-group">
+        {SIZES.map((s) => (
+          <button
+            key={s}
+            className={`size-btn ${strokeWidth === s ? "active" : ""}`}
+            onClick={() => setStrokeWidth(s)}
+            title={`${s}px`}
           >
-            <Trash2 size={16} strokeWidth={1.8} />
+            <span
+              className="size-pip"
+              style={{ width: s + 3, height: s + 3 }}
+            />
           </button>
-        </div>
+        ))}
+      </div>
+
+      <div className="toolbar-sep" />
+
+      {/* Actions */}
+      <div className="toolbar-group">
+        <button className="tool-btn" onClick={onUndo} title="Undo (Ctrl+Z)">
+          <Undo2 size={15} strokeWidth={1.9} />
+        </button>
+        <button className="tool-btn danger" onClick={onClear} title="Clear All">
+          <Trash2 size={15} strokeWidth={1.9} />
+        </button>
       </div>
     </div>
   );
-};
-
-export default Toolbar;
+}
