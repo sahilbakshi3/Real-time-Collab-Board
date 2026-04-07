@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { io } from "socket.io-client";
 
 export function useSocket(serverUrl) {
@@ -41,17 +41,17 @@ export function useSocket(serverUrl) {
     return () => socket.disconnect();
   }, [serverUrl]);
 
-  const emit = (event, data) => {
+  const emit = useCallback((event, data) => {
     if (socketRef.current) socketRef.current.emit(event, data);
-  };
+  }, []);
 
-  const on = (event, handler) => {
+  const on = useCallback((event, handler) => {
     if (socketRef.current) socketRef.current.on(event, handler);
-  };
+  }, []);
 
-  const off = (event, handler) => {
+  const off = useCallback((event, handler) => {
     if (socketRef.current) socketRef.current.off(event, handler);
-  };
+  }, []);
 
   return { socket: socketRef, connected, myInfo, users, emit, on, off };
 }

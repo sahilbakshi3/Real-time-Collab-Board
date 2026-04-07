@@ -8,7 +8,7 @@ import StickyNotes from "./components/StickyNotes.jsx";
 import Header from "./components/Header.jsx";
 import "./App.css";
 
-const SERVER_URL = "http://localhost:3001";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3001";
 
 export default function App() {
   const [tool, setTool] = useState("pen");
@@ -19,18 +19,23 @@ export default function App() {
 
   const { connected, myInfo, users, emit, on, off } = useSocket(SERVER_URL);
 
-  const { canvasRef, handleMouseDown, handleMouseMove, handleMouseUp } =
-    useCanvas({
-      tool,
-      color,
-      strokeWidth,
-      emit,
-      on,
-      off,
-      eraserColor: "#111113",
-      shapes,
-      setShapes,
-    });
+  const {
+    canvasRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    redrawCanvas,
+  } = useCanvas({
+    tool,
+    color,
+    strokeWidth,
+    emit,
+    on,
+    off,
+    eraserColor: "#111113",
+    shapes,
+    setShapes,
+  });
 
   useEffect(() => {
     if (!on || !off) return;
@@ -38,6 +43,8 @@ export default function App() {
     const handleInit = ({ canvasState }) => {
       if (canvasState?.stickies) setStickies(canvasState.stickies);
       if (canvasState?.shapes) setShapes(canvasState.shapes);
+      if (canvasState)
+        redrawCanvas(canvasState.strokes || [], canvasState.shapes || []);
     };
     const handleStickyAdded = (sticky) =>
       setStickies((prev) => [
@@ -185,7 +192,7 @@ export default function App() {
         onUndo={() => emit("undo")}
         onAddSticky={handleAddSticky}
       />
-      <UsersPanel users={users} myInfo={myInfo} />
+      <UsersPanel users={users} myInfo={myInfo} connected={connected} />
     </div>
   );
 }
