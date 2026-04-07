@@ -112,8 +112,10 @@ io.on("connection", (socket) => {
   socket.on("undo", () => {
     if (canvasState.strokes.length > 0) {
       canvasState.strokes.pop();
-      io.emit("canvas-state", canvasState);
+    } else if (canvasState.shapes.length > 0) {
+      canvasState.shapes.pop();
     }
+    io.emit("canvas-state", canvasState);
   });
 
   socket.on("clear-canvas", () => {
